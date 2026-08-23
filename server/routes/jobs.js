@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { searchRemoteJobs } from '../services/remotiveClient.js';
+import { searchRemoteJobs } from '../clients/remotiveClient.js';
 
 const router = Router();
 
