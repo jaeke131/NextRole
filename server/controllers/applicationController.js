@@ -1,16 +1,24 @@
-import Application from "../models/applicationsSchema";
+import {
+  createApplication as insertApplication,
+  deleteApplication as removeApplication,
+  ensureApplicationsTable,
+  findApplications,
+  updateApplication as updateApplicationById,
+} from "../models/applicationsSchema.js";
 
+export const getApplications = async (req, res) => {
+  try {
+    await ensureApplicationsTable();
 
-export const getApplications = async (req, res) => { 
-    try { 
-        const application = await Application.find().sort( { createdAt: 1});
-        res.status(200).json(applications);
+    const applications = await findApplications();
 
-    }catch (error){ 
-        res.status(500).json({message: "Failed to fetch applications"});
+    return res.status(200).json(applications);
+  } catch (error) {
+    console.error("Get applications error:", error);
 
-    }
-}; 
+    return res.status(500).json({ message: "Failed to fetch applications" });
+  }
+};
 
 export const createApplication = async (req, res) => { 
     try { 
