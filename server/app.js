@@ -1,7 +1,8 @@
 import cors from 'cors'; //Cross origin ?? 
 import dotenv from 'dotenv';
 import express from 'express';
-
+import applicationRoutes from "./routes/applicationRoute.js";
+import userRoutes from "./routes/userRoute.js"
 //Start Server 
 const app = express() 
 //Initialize port 
@@ -10,6 +11,9 @@ const port = process.env.PORT || 4000;
 //Start and allow cross origin from the env file on my ip address 
 app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://127.0.0.1:5173' }));
 app.use(express.json());
+
+app.use("/api/applications", applicationRoutes); 
+app.use("/api/users", userRoutes);
 
 app.get("/health" , (req, res) => { 
     res.status(200).json({
