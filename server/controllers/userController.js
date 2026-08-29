@@ -1,13 +1,8 @@
-<<<<<<< HEAD
 import {
   createUser as insertUser,
   ensureUsersTable,
   findUserByEmail,
 } from "../models/userSchema.js";
-=======
-// server/controllers/userController.js
-import User from "../models/userSchema.js";
->>>>>>> origin/main
 
 export const createUser = async (req, res) => {
   try {
