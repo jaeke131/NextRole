@@ -1,5 +1,6 @@
 import pg from "pg";
 
+<<<<<<< HEAD
 const { Pool } = pg;
 
 const poolConfig = process.env.DATABASE_URL
@@ -7,6 +8,13 @@ const poolConfig = process.env.DATABASE_URL
       connectionString: process.env.DATABASE_URL,
       ssl: 
         process.env.PGSSLMODE === "require" ? { rejectUnauthorized: false } : false,
+=======
+async function connectDB() {
+  try {
+    if (!process.env.MONGODB_URI) {
+      console.warn('MONGODB_URI is missing; starting API without MongoDB.');
+      return false;
+>>>>>>> origin/main
     }
   : {
       host: process.env.POSTGRES_HOST || "localhost",
@@ -16,10 +24,20 @@ const poolConfig = process.env.DATABASE_URL
       password: process.env.POSTGRES_PASSWORD, 
     };
 
+<<<<<<< HEAD
 export const pool = new Pool(poolConfig);
 
 export function query(text, params) { 
   return pool.query(text, params)
+=======
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log('Connected to MongoDB.');
+    return true;
+  } catch (error) {
+    console.error('MongoDB connection failed:', error.message);
+    return false;
+  }
+>>>>>>> origin/main
 }
 
 export async function connectDB() { 

@@ -46,8 +46,23 @@ export async function createUser({ name, email, password, role = "user" }) {
   return result.rows[0];
 }
 
+<<<<<<< HEAD
 export default {
   ensureUsersTable,
   findUserByEmail,
   createUser,
 };
+=======
+        
+    },
+    createdAt: { 
+        type: Date, 
+        default: Date.now
+    }
+
+});
+
+const user = mongoose.model('User', userSchema);
+
+export default user; 
+>>>>>>> origin/main
