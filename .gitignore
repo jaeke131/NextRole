@@ -1,4 +1,3 @@
-# Logs
 # Dependencies
 node_modules/
 
@@ -9,7 +8,9 @@ node_modules/
 
 # Build output
 dist/
+dist-ssr/
 build/
+*.local
 
 # Logs
 *.log
@@ -17,8 +18,13 @@ npm-debug.log*
 
 # Editor and OS files
 .vscode/
+!.vscode/extensions.json
+.idea/
 .DS_Store
 Thumbs.db
 
 # Test output
 coverage/
+
+# Local development data
+src/data/mockData.js
