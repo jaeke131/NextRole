@@ -14,13 +14,8 @@ export const createUser = async (req, res) => {
       });
     }
 
-<<<<<<< HEAD
     await ensureUsersTable();
-
     const existingUser = await findUserByEmail(email);
-=======
-    const existingUser = await User.findOne({ email });
->>>>>>> origin/main
 
     if (existingUser) {
       return res.status(409).json({
@@ -28,22 +23,13 @@ export const createUser = async (req, res) => {
       });
     }
 
-<<<<<<< HEAD
     const user = await insertUser({ name, email, password });
-=======
-    const user = await User.create({
-      name,
-      email,
-      password,
-    });
->>>>>>> origin/main
 
     return res.status(201).json({
       message: "User created successfully",
       user,
     });
   } catch (error) {
-<<<<<<< HEAD
     if (error.code === "23505") {
       return res.status(409).json({
         message: "A user with this email already exists",
@@ -51,17 +37,6 @@ export const createUser = async (req, res) => {
     }
 
     console.error("Create user error:", error);
-
-    return res.status(500).json({
-      message: "Failed to create user",
-    });
+    return res.status(500).json({ message: "Failed to create user" });
   }
 };
-=======
-    return res.status(500).json({
-      message: "Failed to create user",
-      error: error.message,
-    });
-  }
-};
->>>>>>> origin/main
