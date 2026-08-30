@@ -19,10 +19,6 @@
     "google-auth-library": "^10.6.2",
     "lucide-react": "^1.14.0",
     "pg": "^8.23.0",
-<<<<<<< HEAD
-    "pool": "^0.4.1",
-=======
->>>>>>> origin/main
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
   },
