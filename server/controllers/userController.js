@@ -1,5 +1,8 @@
-// server/controllers/userController.js
-import User from "../models/userSchema.js";
+import {
+  createUser as insertUser,
+  ensureUsersTable,
+  findUserByEmail,
+} from "../models/userSchema.js";
 
 export const createUser = async (req, res) => {
   try {
@@ -11,7 +14,8 @@ export const createUser = async (req, res) => {
       });
     }
 
-    const existingUser = await User.findOne({ email });
+    await ensureUsersTable();
+    const existingUser = await findUserByEmail(email);
 
     if (existingUser) {
       return res.status(409).json({
@@ -19,20 +23,20 @@ export const createUser = async (req, res) => {
       });
     }
 
-    const user = await User.create({
-      name,
-      email,
-      password,
-    });
+    const user = await insertUser({ name, email, password });
 
     return res.status(201).json({
       message: "User created successfully",
       user,
     });
   } catch (error) {
-    return res.status(500).json({
-      message: "Failed to create user",
-      error: error.message,
-    });
+    if (error.code === "23505") {
+      return res.status(409).json({
+        message: "A user with this email already exists",
+      });
+    }
+
+    console.error("Create user error:", error);
+    return res.status(500).json({ message: "Failed to create user" });
   }
 };
